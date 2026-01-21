@@ -1,6 +1,6 @@
 # LangChain
 
-LangChain gives us a consistent abstraction for invoking LLMs across providers. Consistent output shapes are achieved by explicitly constraining model output using structured schemas, which LangChain helps enforce.
+LangChain abstracts LLM invocation across providers. When paired with a schema (e.g. Zod), it enforces the structural shape of model outputs, but it does not control or guarantee the semantics of the response.
 
 It provides:
 
