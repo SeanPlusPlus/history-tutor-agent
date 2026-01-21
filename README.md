@@ -107,3 +107,20 @@ npm run verify
 ```
 
 This command compiles the TypeScript code and runs a minimal Node-based test. It is intentionally simple and does not use a test framework.
+
+---
+
+## OpenAI API key verification
+
+To verify that your OpenAI API key is present and valid, run:
+
+```bash
+npm run check:openai
+```
+
+This command performs two checks:
+
+- Confirms that the `OPENAI_API_KEY` environment variable is set
+- Makes a lightweight request to the OpenAI API to verify the key is valid
+
+This script is intended for local development and debugging. It does not run as part of the main application flow.

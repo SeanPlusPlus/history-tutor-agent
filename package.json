@@ -12,7 +12,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "fix": "npm run lint:fix && npm run format:fix"
+    "fix": "npm run lint:fix && npm run format:fix",
+    "check:openai": "tsx src/scripts/check-openai.ts"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
