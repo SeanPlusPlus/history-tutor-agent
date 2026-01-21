@@ -1,5 +1,5 @@
 function main() {
-  console.log("history-tutor-agent: hello world");
+  console.log('history-tutor-agent: hello world')
 }
 
-main();
+main()

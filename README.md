@@ -5,6 +5,7 @@ A very small TypeScript project that builds a simple history tutor agent from fi
 The goal is not to build a smart agent, but a **clear one** — something you can read top-to-bottom and understand how a basic “question → think → answer” flow works using modern LLM tooling.
 
 This project intentionally keeps:
+
 - one agent
 - one graph
 - minimal prompts
