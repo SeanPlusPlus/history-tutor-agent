@@ -78,14 +78,26 @@ Create a `.env` file at the project root:
 OPENAI_API_KEY=sk-...
 ```
 
-Never commit this file.
+Never commit this file. Bun loads `.env` automatically.
+
+---
+
+## Prerequisites
+
+This project uses [Bun](https://bun.sh) as its runtime and package manager.
+
+Install Bun:
+
+```bash
+curl -fsSL https://bun.sh/install | bash
+```
 
 ---
 
 ## Installation
 
 ```bash
-npm install
+bun install
 ```
 
 ---
@@ -95,10 +107,9 @@ npm install
 To run the CLI:
 
 ```bash
-npm run -s dev
+bun run dev
 ```
 
-The `-s` flag suppresses npm’s script banner so only the spinner and output are shown.
 
 ---
 
@@ -107,13 +118,13 @@ The `-s` flag suppresses npm’s script banner so only the spinner and output ar
 Check linting:
 
 ```bash
-npm run lint
+bun run lint
 ```
 
 Fix linting and formatting:
 
 ```bash
-npm run fix
+bun run fix
 ```
 
 ---
@@ -123,7 +134,7 @@ npm run fix
 To confirm that your API key is present and valid:
 
 ```bash
-npm run check:openai
+bun run check:openai
 ```
 
 This script checks that:

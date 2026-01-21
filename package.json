@@ -4,16 +4,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx src/index.ts",
+    "dev": "bun run src/index.ts",
     "build": "tsc",
-    "test": "node dist/test.js",
-    "verify": "npm run build && npm test",
+    "test": "bun run dist/test.js",
+    "verify": "bun run build && bun test",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "fix": "npm run lint:fix && npm run format:fix",
-    "check:openai": "tsx src/scripts/check-openai.ts"
+    "fix": "bun run lint:fix && bun run format:fix",
+    "check:openai": "bun run src/scripts/check-openai.ts"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
@@ -22,7 +22,6 @@
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.2.5",
-    "tsx": "^4.7.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {
