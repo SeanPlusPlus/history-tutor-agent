@@ -6,10 +6,10 @@ const question = 'Why did the Roman Empire fall?'
 
 const spinner = ora('Thinking...').start()
 
-const result = await tutorGraph.invoke({
-  question,
-})
-
+const result = await tutorGraph.invoke(
+  { question },
+  { runName: 'history-tutor-cli' }
+)
 spinner.succeed('Answer ready')
 
 console.log('\nAnswer:\n')
