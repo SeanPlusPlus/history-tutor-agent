@@ -47,7 +47,7 @@ npm install
 Run the app in development mode (TypeScript, no build step):
 
 ```bash
-npm run dev
+npm run -s dev
 ```
 
 Build the project:
