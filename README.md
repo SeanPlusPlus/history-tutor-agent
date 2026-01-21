@@ -1,1 +1,148 @@
-Running a deterministic state machine where some transitions are powered by probabilistic functions (LLMs), but constrained by contracts.
+# history-tutor-agent
+
+A deliberately small TypeScript project for building a **history tutor CLI** from first principles.
+
+The goal is not to ship a feature-rich agent. The goal is to **develop a correct mental model** of the LangChain ecosystem by building something you can read, understand, and explain end-to-end.
+
+This repo progresses intentionally in this order:
+
+1. **LangChain** — invoke an LLM behind a clean abstraction
+2. **LangGraph** — express multi-step behavior as an explicit state machine
+3. **LangSmith** — observe and debug once behavior exists
+
+If the code ever stops being easy to reason about, it’s doing the wrong thing.
+
+---
+
+## Philosophy
+
+This project treats LLMs as _components_, not magic.
+
+- State is explicit and validated
+- Control flow is declarative, not loop-based
+- Model outputs are constrained with schemas
+- Failure modes are visible, not implicit
+
+The result is a small but real system that behaves like software, not prompt glue.
+
+---
+
+## LangChain (invocation + structure)
+
+LangChain is used as a **thin abstraction over LLM invocation**.
+
+It standardizes:
+
+- how models are called
+- how messages are passed
+- how providers are swapped
+
+It does **not** control semantics.
+
+To enforce output shape, LangChain is paired with **Zod** using structured output. Each model call must return data that conforms to an explicit schema or fail loudly.
+
+This establishes a clean contract:
+
+- LangChain executes the call
+- Zod enforces structure
+- Semantics are handled via prompts and evaluation
+
+---
+
+## LangGraph (explicit control flow)
+
+As soon as the tutor requires more than one model call (for example: _think → answer_), coordination becomes the core problem.
+
+LangGraph solves this by treating the system as a **typed state machine**.
+
+- State is defined at runtime using a Zod schema
+- Nodes receive state and return partial state updates
+- Edges define the only legal execution paths
+- Termination is structural, not heuristic
+
+There is no long-running `while` loop. Iteration happens by **walking the graph**, not by spinning until a condition is met.
+
+If repetition is desired, a loop is drawn explicitly. If not, it cannot happen.
+
+This eliminates an entire class of runaway-agent bugs.
+
+---
+
+## Environment variables
+
+This project requires an OpenAI API key.
+
+Create a `.env` file at the project root:
+
+```env
+OPENAI_API_KEY=sk-...
+```
+
+Never commit this file.
+
+---
+
+## Installation
+
+```bash
+npm install
+```
+
+---
+
+## Running the tutor
+
+To run the CLI:
+
+```bash
+npm run -s dev
+```
+
+The `-s` flag suppresses npm’s script banner so only the spinner and output are shown.
+
+---
+
+## Linting and formatting
+
+Check linting:
+
+```bash
+npm run lint
+```
+
+Fix linting and formatting:
+
+```bash
+npm run fix
+```
+
+---
+
+## Verifying OpenAI access
+
+To confirm that your API key is present and valid:
+
+```bash
+npm run check:openai
+```
+
+This script checks that:
+
+- `OPENAI_API_KEY` is set
+- the key can successfully hit the OpenAI API
+
+---
+
+## Mental model (one-liner)
+
+> LangChain standardizes _how_ we talk to models.
+> Zod defines _what_ we accept back.
+> LangGraph defines _when_ and _in what order_ things are allowed to happen.
+
+---
+
+## Status
+
+This repo is intentionally small and evolving.
+
+Each new concept is added only when it becomes necessary
