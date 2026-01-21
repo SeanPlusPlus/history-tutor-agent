@@ -1,20 +1,44 @@
 # history-tutor-agent
 
-A very small TypeScript project that builds a simple history tutor agent from first principles.
+A very small TypeScript project that builds a simple **history tutor CLI** from first principles.
 
-The goal is not to build a smart agent, but a **clear one** — something you can read top-to-bottom and understand how a basic “question → think → answer” flow works using modern LLM tooling.
+The goal is to **nail the mental model** of the LangChain ecosystem by building something you can read top‑to‑bottom and fully understand.
+
+This repo intentionally progresses in this order:
+
+1. **LangChain first** — make a single, well‑typed model call
+2. **LangGraph second** — introduce control flow only when it becomes necessary
+3. **LangSmith third** — observe and debug once behavior exists
 
 This project intentionally keeps:
 
-- one agent
-- one graph
+- one tutor
+- one question at a time
 - minimal prompts
-- explicit guardrails
+- explicit schemas and guardrails
 - no magic abstractions
 
-Over time, this repo may evolve, but every change should preserve readability and explainability.
+Over time, the repo may evolve, but every change should preserve readability and explainability.
 
 If it stops being easy to understand, it’s doing the wrong thing.
+
+---
+
+## LangChain (first principles)
+
+The first milestone in this repo is a **single LangChain call** with a hard contract.
+
+We use LangChain only as a thin wrapper around an LLM call — no agents, no graphs, no loops.
+
+Model output is constrained using a Zod schema so the function returns a **typed object**, not free‑form text. If the model fails to comply with the schema, the call fails loudly.
+
+This establishes a clear mental model:
+
+- LangChain does **not** make decisions
+- LangChain does **not** manage control flow
+- LangChain simply executes a model call and enforces structure
+
+Only after this step feels obvious do we introduce LangGraph.
 
 ---
 
@@ -47,7 +71,7 @@ npm install
 Run the app in development mode (TypeScript, no build step):
 
 ```bash
-npm run -s dev
+npm run dev
 ```
 
 Build the project:
