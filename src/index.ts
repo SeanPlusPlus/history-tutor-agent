@@ -1,23 +1,16 @@
 import 'dotenv/config'
 import ora from 'ora'
-import { answerQuestion } from './langchain/answerQuestion.js'
+import { tutorGraph } from './graph/tutorGraph.js'
 
 const question = 'Why did the Roman Empire fall?'
 
 const spinner = ora('Thinking...').start()
 
-try {
-  const answer = await answerQuestion(question)
+const result = await tutorGraph.invoke({
+  question,
+})
 
-  spinner.succeed('Answer ready')
+spinner.succeed('Answer ready')
 
-  console.log('\nQuestion:')
-  console.log(question)
-
-  console.log('\nAnswer:')
-  console.log(answer)
-} catch (err) {
-  spinner.fail('Failed to get answer')
-  console.error(err)
-  process.exit(1)
-}
+console.log('\nAnswer:\n')
+console.log(result.answer)
