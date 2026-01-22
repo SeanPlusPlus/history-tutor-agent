@@ -8,8 +8,17 @@ const spinner = ora('Thinking...').start()
 
 const result = await tutorGraph.invoke(
   { question },
-  { runName: 'history-tutor-cli' }
+  {
+    runName: 'history-tutor-cli',
+    tags: ['cli', 'history', 'v1'],
+    metadata: {
+      entrypoint: 'cli',
+      userIntent: 'ask-history-question',
+      runtime: 'bun',
+    },
+  }
 )
+
 spinner.succeed('Answer ready')
 
 console.log('\nAnswer:\n')
